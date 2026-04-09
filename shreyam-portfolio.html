@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shreyam Chatterjee — Design Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0c0d10;
+    --bg2: #111318;
+    --bg3: #16181f;
+    --gold: #c9963a;
+    --gold2: #f0c060;
+    --text: #e8e4dc;
+    --muted: #7a7870;
+    --border: rgba(201,150,58,0.18);
+    --radius: 4px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.18s ease, width 0.2s ease, height 0.2s ease;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    backdrop-filter: blur(14px);
+    background: rgba(12,13,16,0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 4rem;
+    padding-top: 80px;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    bottom: -2rem; right: -1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(6rem, 18vw, 18rem);
+    color: rgba(201,150,58,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.02em;
+  }
+  .hero-left { position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-tagline {
+    margin-top: 1.6rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 440px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-quote {
+    margin-top: 2.4rem;
+    padding-left: 1.2rem;
+    border-left: 2px solid var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.6;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-cta {
+    margin-top: 2.8rem;
+    display: flex; gap: 1.2rem; align-items: center;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--bg);
+    padding: 0.85rem 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.85rem 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.25s, color 0.25s, transform 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-right {
+    position: relative; z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    animation: fadeUp 0.9s 0.3s ease both;
+  }
+  .stat-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 1.4rem;
+    border-radius: var(--radius);
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .stat-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+  }
+  .role-badge {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.6rem;
+    border-radius: var(--radius);
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .role-dot {
+    width: 8px; height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.3)} }
+  .role-info { font-size: 0.8rem; }
+  .role-info strong { display: block; color: var(--text); font-weight: 400; }
+  .role-info span { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* MARQUEE */
+  .marquee-section {
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    background: var(--bg2);
+  }
+  .marquee-track {
+    display: flex;
+    animation: marquee 28s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    padding: 0 2.4rem;
+    transition: color 0.25s;
+  }
+  .marquee-item:hover { color: var(--gold); }
+  .marquee-sep { color: var(--gold); padding: 0 0.6rem; }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* SECTIONS */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .divider {
+    width: 48px; height: 1px;
+    background: var(--gold);
+    margin: 1.6rem 0 3.2rem;
+  }
+
+  /* ABOUT */
+  #about { background: var(--bg2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text { font-size: 1rem; color: var(--muted); line-height: 2; }
+  .about-text p + p { margin-top: 1.2rem; }
+  .skills-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .skill-pill {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 0.7rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-radius: var(--radius);
+    display: flex; align-items: center; gap: 0.6rem;
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .skill-pill:hover { border-color: var(--gold); color: var(--text); }
+  .skill-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+  .software-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .sw-tag {
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .sw-tag:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* EXPERIENCE */
+  #experience {}
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 3.2rem;
+    padding-bottom: 3.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .tl-item:last-child { border-bottom: none; margin-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -2.38rem; top: 6px;
+    width: 12px; height: 12px;
+    border: 2px solid var(--gold);
+    background: var(--bg);
+    border-radius: 50%;
+  }
+  .tl-dot.active { background: var(--gold); }
+  .tl-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .tl-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+  }
+  .tl-company {
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .tl-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.9; max-width: 560px; }
+  .promo-badge {
+    display: inline-block;
+    margin-top: 0.6rem;
+    background: rgba(201,150,58,0.12);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+  }
+
+  /* CLIENTS */
+  #clients { background: var(--bg2); }
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+  .client-cell {
+    padding: 1.6rem 1.2rem;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    transition: background 0.2s, color 0.2s;
+    cursor: default;
+  }
+  .client-cell:hover { background: rgba(201,150,58,0.06); color: var(--gold); }
+
+  /* CERTIFICATIONS */
+  #certifications {}
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.4rem; margin-top: 3rem; }
+  .cert-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: var(--radius);
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .cert-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .cert-icon {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .cert-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .cert-year {
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--bg2);
+    text-align: center;
+  }
+  .contact-inner { max-width: 640px; margin: 0 auto; }
+  .contact-email {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    font-weight: 300;
+    color: var(--text);
+    text-decoration: none;
+    display: block;
+    margin: 2rem 0;
+    transition: color 0.25s;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+  }
+  .contact-email:hover { color: var(--gold); }
+  .contact-links { display: flex; justify-content: center; gap: 1.6rem; margin-top: 1.8rem; }
+  .contact-link {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    padding: 1.8rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(24px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media(max-width: 900px) {
+    nav { padding: 1.2rem 1.8rem; }
+    #home { grid-template-columns: 1fr; padding: 6rem 1.8rem 3rem; }
+    .hero-right { display: none; }
+    section { padding: 5rem 1.8rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.4rem; }
+    footer { flex-direction: column; gap: 0.6rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">SC.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-tag">Design Specialist · Kolkata, India</div>
+    <h1 class="hero-name">Shreyam<br><em>Chatterjee</em></h1>
+    <p class="hero-tagline">Graphic Designer · Motion Graphics Editor · UI/UX Designer.<br>
+    9+ years of transforming ideas into visual experiences that resonate.</p>
+    <blockquote class="hero-quote">
+      "A designer knows he has achieved perfection not when there is nothing left to add,<br>
+       but when there is nothing left to take away."
+    </blockquote>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://www.behance.net/shreyamchatter" target="_blank">View Portfolio</a>
+      <a class="btn-outline" href="#contact">Let's Connect</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="role-badge">
+      <span class="role-dot"></span>
+      <div class="role-info">
+        <strong>Design Specialist @ Report Yak</strong>
+        <span>Currently Available for Freelance</span>
+      </div>
+    </div>
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="stat-num">9+</div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Brand Clients</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bg-text">DESIGN</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Graphic Design</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Motion Graphics</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">UI / UX Design</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Web Design</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Illustration</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Infographics</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Brand Identity</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Adobe Suite</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Figma</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">After Effects</span><span class="marquee-sep">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Graphic Design</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Motion Graphics</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">UI / UX Design</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Web Design</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Illustration</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Infographics</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Brand Identity</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Adobe Suite</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">Figma</span><span class="marquee-sep">✦</span>
+    <span class="marquee-item">After Effects</span><span class="marquee-sep">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Creative<br><em>by Nature</em></h2>
+      <div class="divider"></div>
+      <div class="about-text">
+        <p>Highly creative and multitalented Graphic Designer with extensive experience in multimedia, marketing and print design. Exceptional collaborative and interpersonal skills; dynamic team player with well-developed written and verbal communication abilities.</p>
+        <p>Highly skilled in client and vendor relations and negotiations; talented at building and maintaining win-win partnerships. Passionate and inventive creator of innovative marketing strategies and campaigns.</p>
+        <p>Accustomed to performing in deadline-driven environments with an emphasis on working within budget requirements. Fluent in English, Bengali, and French.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="section-label">Skills &amp; Tools</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;margin-bottom:0.6rem;">What I Do</h3>
+      <div class="skills-grid">
+        <div class="skill-pill"><span class="skill-dot"></span>Graphic Design</div>
+        <div class="skill-pill"><span class="skill-dot"></span>Motion Graphics</div>
+        <div class="skill-pill"><span class="skill-dot"></span>UI / UX Design</div>
+        <div class="skill-pill"><span class="skill-dot"></span>Web Design</div>
+        <div class="skill-pill"><span class="skill-dot"></span>Illustration</div>
+        <div class="skill-pill"><span class="skill-dot"></span>Infographics</div>
+      </div>
+      <div style="margin-top:2.4rem;">
+        <div class="section-label" style="margin-bottom:1rem;">Software Proficiency</div>
+        <div class="software-list">
+          <span class="sw-tag">Photoshop</span>
+          <span class="sw-tag">Illustrator</span>
+          <span class="sw-tag">InDesign</span>
+          <span class="sw-tag">After Effects</span>
+          <span class="sw-tag">Adobe XD</span>
+          <span class="sw-tag">Dreamweaver</span>
+          <span class="sw-tag">Figma</span>
+          <span class="sw-tag">Premiere Pro</span>
+          <span class="sw-tag">Lightroom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">Work History</div>
+    <h2 class="section-title">Years of<br><em>Experience</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline reveal">
+
+    <div class="tl-item">
+      <div class="tl-dot active"></div>
+      <div class="tl-year">2025 — Present</div>
+      <h3 class="tl-role">Design Specialist</h3>
+      <div class="tl-company">Report Yak · Synapse Communication Design Pvt. Ltd</div>
+      <p class="tl-desc">Leading design direction as a specialist, crafting communication-driven visuals and reports for a design-forward consultancy.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2024</div>
+      <h3 class="tl-role">Graphic &amp; UI/UX Designer · Motion Graphics Editor</h3>
+      <div class="tl-company">ANDREAL · Anderson Technology Pvt. Ltd</div>
+      <p class="tl-desc">Responsible for end-to-end visual design and motion content. Recognised for performance and promoted mid-tenure.</p>
+      <span class="promo-badge">⬆ Promoted — Design &amp; Production Co-ordinator</span>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2020 — 2021</div>
+      <h3 class="tl-role">Graphic Designer · Motion Graphics Editor · Web Designer</h3>
+      <div class="tl-company">W3WebHelp · Kolkata</div>
+      <p class="tl-desc">Full-stack creative role spanning brand design, animated content, and website visual design across multiple client projects.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2020</div>
+      <h3 class="tl-role">Graphic Designer · Motion Graphics Editor</h3>
+      <div class="tl-company">Glamart Advertising · Kolkata</div>
+      <p class="tl-desc">Delivered advertising-focused graphic and motion design work for a variety of local and national brands.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2019</div>
+      <h3 class="tl-role">Graphic Designer · Motion Graphics Editor · Web Designer</h3>
+      <div class="tl-company">NHRO — National Human Rights Organization · Kolkata</div>
+      <p class="tl-desc">Creative design and digital communications for a national human rights organisation, producing multimedia content and digital assets.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2016</div>
+      <h3 class="tl-role">Graphics Designer &amp; Editor</h3>
+      <div class="tl-company">Dreams · Kolkata</div>
+      <p class="tl-desc">Early-career role building foundational design and editing skills across print and digital media.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="reveal">
+    <div class="section-label">Brands I've Worked With</div>
+    <h2 class="section-title">Trusted by<br><em>Great Names</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="clients-grid reveal">
+    <div class="client-cell">Maruti Suzuki</div>
+    <div class="client-cell">Radisson Blue</div>
+    <div class="client-cell">Ambuja Neotia</div>
+    <div class="client-cell">Mani Group</div>
+    <div class="client-cell">Lux</div>
+    <div class="client-cell">Himalaya</div>
+    <div class="client-cell">Mio Amore</div>
+    <div class="client-cell">Jalan Group</div>
+    <div class="client-cell">Maroon (Beauty &amp; Salon)</div>
+    <div class="client-cell">NHRO</div>
+    <div class="client-cell">Shanghai</div>
+    <div class="client-cell">Maurya Homes</div>
+    <div class="client-cell">Sonnet</div>
+    <div class="client-cell">Rollick Icecream</div>
+    <div class="client-cell">Yoganica</div>
+    <div class="client-cell">Sundarini Naturals</div>
+    <div class="client-cell">Protech Realtors</div>
+    <div class="client-cell">Dabri Tea</div>
+    <div class="client-cell">Food Bay</div>
+    <div class="client-cell">Polar</div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="reveal">
+    <div class="section-label">Education &amp; Credentials</div>
+    <h2 class="section-title">Learning<br><em>Never Stops</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="cert-grid reveal">
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">Diploma in Multimedia and Advance Cinematics</div>
+      <div class="cert-year">MAAC · 2016</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🤖</div>
+      <div class="cert-name">Master Generative AI</div>
+      <div class="cert-year">The Great Learning · 2019</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🧠</div>
+      <div class="cert-name">Master Artificial Intelligence</div>
+      <div class="cert-year">The Great Learning · 2020</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">⚡</div>
+      <div class="cert-name">Prompt Engineering &amp; Automation Workflow</div>
+      <div class="cert-year">Anthropic · Ongoing</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Build<br><em>Something Great</em></h2>
+    <div class="divider" style="margin: 1.6rem auto 2rem;"></div>
+    <p style="color:var(--muted);font-size:0.9rem;line-height:1.9;max-width:480px;margin:0 auto;">
+      I'm open to full-time roles, freelance projects, and creative collaborations. Drop me a line — let's make something unforgettable.
+    </p>
+    <a class="contact-email" href="mailto:shreyam.official97@gmail.com">shreyam.official97@gmail.com</a>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.4rem;">+91 9123605881 · Sodepur, Kolkata</p>
+    <div class="contact-links">
+      <a class="contact-link" href="https://www.behance.net/shreyamchatter" target="_blank">Behance</a>
+      <a class="contact-link" href="https://www.instagram.com/its_maymade/?hl=en" target="_blank">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Shreyam Chatterjee. All rights reserved.</span>
+  <span>Design Specialist · Kolkata, India</span>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animate(){
+    rx += (mx - rx) * 0.14;
+    ry += (my - ry) * 0.14;
+    cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animate);
+  })();
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
